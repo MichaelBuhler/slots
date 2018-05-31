@@ -104,6 +104,13 @@
         "parameter": "nospace",
         "property-declaration": "nospace",
         "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
       }
     ],
     "unified-signatures": true,
@@ -113,8 +120,8 @@
       "check-branch",
       "check-decl",
       "check-operator",
-      "check-separator",
-      "check-type"
+      "check-module",
+      "check-separator"
     ],
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,

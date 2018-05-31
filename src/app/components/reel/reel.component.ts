@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ReelService } from '../../services/reel.service';
 
 @Component({
   selector: 'slots-reel',
@@ -7,20 +8,20 @@ import { Component } from '@angular/core';
 })
 export class ReelComponent {
 
-  offset = 0;
-  style: BackgroundPositionStyle;
+  private offset = 0;
+  private style:ReelBackgroundPositionStyle;
 
-  constructor() {
+  constructor ( private reelService:ReelService ) {
     setInterval(() => {
-      this.offset += 100;
+      this.offset += 10;
       this.style = {
         'background-position-y': this.offset + 'px'
       };
-    }, 1000);
+    }, 100);
   }
 
 }
 
-interface BackgroundPositionStyle {
-  'background-position-y': string;
+interface ReelBackgroundPositionStyle {
+  'background-position-y':string;
 }
