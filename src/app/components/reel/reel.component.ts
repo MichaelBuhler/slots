@@ -10,7 +10,10 @@ import { ReelBackgroundPositionStyle } from '../../models/reel.background.positi
 export class ReelComponent implements OnInit {
 
   @Input()
-  private positionObservable:Observable<number>;
+  private positionCount:number;
+
+  @Input()
+  private reelPositionObservable:Observable<number>;
 
   private state:ReelState = ReelState.STOPPED;
   private style:ReelBackgroundPositionStyle;
@@ -19,9 +22,9 @@ export class ReelComponent implements OnInit {
   }
 
   public ngOnInit () : void {
-    this.positionObservable.subscribe(( position:number ) => {
+    this.reelPositionObservable.subscribe((position:number) => {
       this.style = {
-        'background-position-y': position + '%'
+        'background-position-y': (140 * position / this.positionCount - 10) + '%'
       };
     });
   }

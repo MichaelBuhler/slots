@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { SpinResultObservable } from '../../models/spin.result';
 
 @Component({
   selector: 'slots-reel-row',
@@ -11,31 +12,26 @@ export class ReelRowComponent implements OnInit {
   @Input()
   private reelCount:number;
 
-  private reels:any[];
+  @Input()
+  private positionCount:number;
 
-  /*
-   * TODO move this stuff
-   */
-  private iconHeight:number = 256;
-  private spritesheetPositions:number = 7;
+  @Input()
+  private spinResultObservable:SpinResultObservable;
+
+  private reelPositionSubjects:Subject<number>[] = [];
 
   public constructor () {
   }
 
   public ngOnInit () : void {
-    const subject:Subject<number> = new Subject<number>();
-    const observable:Observable<number> = subject.asObservable();
-    this.reels = new Array(this.reelCount).fill({
-      subject,
-      observable
+    for ( let i:number = 0 ; i < this.reelCount ; i ++ ) {
+      this.reelPositionSubjects.push(new Subject<number>());
+    }
+
+    this.spinResultObservable.subscribe((spinResult:number[]) => {
+      spinResult.forEach((position:number, index:number) => {
+        this.reelPositionSubjects[index].next(position);
+      });
     });
-    let position:number = -1;
-    const nextPosition:() => void = () : void => {
-      position += 1;
-      position %= this.spritesheetPositions * 2;
-      this.reels.forEach((reel) => reel.subject.next(140 * position / this.spritesheetPositions - 10));
-    };
-    nextPosition();
-    setInterval(nextPosition, 1000);
   }
 }

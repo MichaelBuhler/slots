@@ -1,2 +1,6 @@
-<slots-reel *ngFor="let reel of reels" [positionObservable]="reel.observable"></slots-reel>
+<slots-reel
+  *ngFor="let reelPositionSubject of reelPositionSubjects"
+  [positionCount]="positionCount"
+  [reelPositionObservable]="reelPositionSubject.asObservable()">
+</slots-reel>
 <div class="slots-result-box"></div>

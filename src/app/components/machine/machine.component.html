@@ -1,2 +1,7 @@
-<slots-reel-row class="slots-reel-row" [reelCount]="reelCount"></slots-reel-row>
-<button>Spin</button>
+<slots-reel-row
+  class="slots-reel-row"
+  [reelCount]="reelCount"
+  [positionCount]="positionCount"
+  [spinResultObservable]="spinResultSubject.asObservable()">
+</slots-reel-row>
+<button (click)="spin()">Spin</button>
