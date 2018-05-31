@@ -1,0 +1,8 @@
+.sprite {
+  background-image: url(spritesheet.png);
+  background-repeat: repeat-y;
+  background-size: 100%;
+  display: inline-block;
+  height: 192px;
+  width: 128px;
+}
