@@ -31,7 +31,11 @@
       true,
       140
     ],
-    "member-access": false,
+    "member-access": [
+      true,
+      "check-accessor",
+      "check-constructor"
+    ],
     "member-ordering": [
       true,
       {
@@ -59,17 +63,17 @@
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-inferrable-types": false,
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": [
+      true,
+      "ignore-blank-lines"
+    ],
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
     "no-use-before-declare": true,
@@ -96,17 +100,29 @@
       true,
       "allow-null-check"
     ],
+    "typedef": [
+      true,
+      "call-signature",
+      "arrow-call-signature",
+      "parameter",
+      "arrow-parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
+    ],
     "typedef-whitespace": [
       true,
       {
-        "call-signature": "nospace",
+        "call-signature": "onespace",
         "index-signature": "nospace",
         "parameter": "nospace",
         "property-declaration": "nospace",
         "variable-declaration": "nospace"
       },
       {
-        "call-signature": "nospace",
+        "call-signature": "onespace",
         "index-signature": "nospace",
         "parameter": "nospace",
         "property-declaration": "nospace",

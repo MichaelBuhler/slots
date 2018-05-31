@@ -1,0 +1,7 @@
+.slots-result-box {
+  border: 1px solid black;
+  height: 256px;
+  position: absolute;
+  top: 128px;
+  width: 100%;
+}

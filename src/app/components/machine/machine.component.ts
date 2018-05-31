@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./machine.component.css']
 })
 export class MachineComponent {
+
+  private reelCount:number = 3;
+
+  public constructor () {}
 }

@@ -1,27 +1,36 @@
-import { Component } from '@angular/core';
-import { ReelService } from '../../services/reel.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ReelBackgroundPositionStyle } from '../../models/reel.background.position.style';
 
 @Component({
   selector: 'slots-reel',
   templateUrl: './reel.component.html',
   styleUrls: ['./reel.component.css']
 })
-export class ReelComponent {
+export class ReelComponent implements OnInit {
 
-  private offset = 0;
+  @Input()
+  private positionObservable:Observable<number>;
+
+  private state:ReelState = ReelState.STOPPED;
   private style:ReelBackgroundPositionStyle;
 
-  constructor ( private reelService:ReelService ) {
-    setInterval(() => {
-      this.offset += 10;
+  public constructor () {
+  }
+
+  public ngOnInit () : void {
+    this.positionObservable.subscribe(( position:number ) => {
       this.style = {
-        'background-position-y': this.offset + 'px'
+        'background-position-y': position + '%'
       };
-    }, 100);
+    });
   }
 
 }
 
-interface ReelBackgroundPositionStyle {
-  'background-position-y':string;
+enum ReelState {
+  STOPPED,
+  STARTING,
+  SPINNING,
+  STOPPING
 }
