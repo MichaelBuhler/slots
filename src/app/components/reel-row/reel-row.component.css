@@ -1,3 +1,7 @@
+.slots-reel {
+  margin: 20px;
+}
+
 .slots-result-box {
   border: 1px solid black;
   height: 256px;
