@@ -19,10 +19,15 @@ export class MachineComponent {
   private positionCount:number = 7;
   private spinResultSubject:SpinResultSubject = new SpinResultSubject();
 
-  private bank:number = 100;
+  private depositAmount:number = 100;
+  private bank:number = 0;
 
   public constructor () {
     this.winTableRowProvider = new SimpleWinTableService(new MathDotRandomService());
+  }
+
+  private deposit (amount:number) : void {
+    this.bank += amount;
   }
 
   private spin (bet:number) : void {
