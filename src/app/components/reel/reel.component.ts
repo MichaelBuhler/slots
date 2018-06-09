@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ReelBackgroundPositionStyle } from '../../models/reel.background.position.style';
+import { IReelBackgroundPositionStyle } from '../../models/reel.background.position.style';
 
 @Component({
   selector: 'slots-reel',
@@ -16,7 +16,7 @@ export class ReelComponent implements OnInit {
   private reelPositionObservable:Observable<number>;
 
   private state:ReelState = ReelState.STOPPED;
-  private style:ReelBackgroundPositionStyle;
+  private style:IReelBackgroundPositionStyle;
 
   public constructor () {
   }

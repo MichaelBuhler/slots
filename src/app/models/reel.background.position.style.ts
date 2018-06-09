@@ -1,3 +1,3 @@
-export interface ReelBackgroundPositionStyle {
+export interface IReelBackgroundPositionStyle {
   'background-position-y':string;
 }
