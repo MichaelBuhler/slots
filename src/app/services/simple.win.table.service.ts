@@ -1,5 +1,6 @@
-import { IPayoffProvider } from './payoff.provider.interface';
-import { IPsuedoRandomNumberGenerator } from './psuedo.random.number.generator.interface';
+import { IPayoffProvider } from '../interfaces/payoff.provider.interface';
+import { IPsuedoRandomNumberGenerator } from '../interfaces/psuedo.random.number.generator.interface';
+import { IWinTableRow } from '../models/win.table.row';
 
 export class SimpleWinTableService implements IPayoffProvider {
 
@@ -11,7 +12,7 @@ export class SimpleWinTableService implements IPayoffProvider {
   private  ORANGE:number = 5;
   private   SEVEN:number = 6;
 
-  private table:PayoffLevel[] = [{
+  private table:IWinTableRow[] = [{
     max: 0.75,
     payoff: 0
   }, {
@@ -59,10 +60,4 @@ export class SimpleWinTableService implements IPayoffProvider {
     }
   }
 
-}
-
-interface PayoffLevel {
-  max:number;
-  payoff:number;
-  combinations?:number[][];
 }

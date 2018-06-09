@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { SpinResultSubject } from '../../models/spin.result';
-import { IPayoffProvider } from '../../services/payoff.provider.interface';
 import { SimpleWinTableService } from '../../services/simple.win.table.service';
 import { MathDotRandomService } from '../../services/math.dot.random.service';
+import { IPayoffProvider } from '../../interfaces/payoff.provider.interface';
 
 @Component({
   selector: 'slots-machine',
