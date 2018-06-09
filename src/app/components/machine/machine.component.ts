@@ -35,6 +35,7 @@ export class MachineComponent {
       for ( let i:number = 0 ; i < this.reelCount ; i++ ) {
         permutation.push(Math.floor(Math.random() * this.positionCount));
       }
+      // TODO: need to verify this combination is not one of the other valid combinations
     }
     this.spinResultSubject.next(permutation);
 

@@ -4,6 +4,6 @@
   [positionCount]="positionCount"
   [spinResultObservable]="spinResultSubject.asObservable()">
 </slots-reel-row>
-<button (click)="spin(1)">Bet $1</button>
-<button (click)="spin(5)">Bet $5</button>
+<button (click)="spin(1)" [disabled]="bank < 1">Bet $1</button>
+<button (click)="spin(5)" [disabled]="bank < 5">Bet $5</button>
 Bank: {{bank}}
