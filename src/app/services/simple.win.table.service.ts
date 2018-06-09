@@ -1,10 +1,7 @@
 import { IPayoffProvider } from './payoff.provider.interface';
-import { MathDotRandomService } from './math.dot.random.service';
 import { IPsuedoRandomNumberGenerator } from './psuedo.random.number.generator.interface';
 
 export class SimpleWinTableService implements IPayoffProvider {
-
-  private prng:IPsuedoRandomNumberGenerator;
 
   private table:PayoffLevel[] = [{
     max: 0.75,
@@ -26,15 +23,18 @@ export class SimpleWinTableService implements IPayoffProvider {
     payoff: 161
   }];
 
-  public constructor (private prng:MathDotRandomService) {
+  public constructor ( private prng:IPsuedoRandomNumberGenerator ) {
   }
 
   public getPayoff () : number {
     const random:number = this.prng.next();
-    for ( let i:number = this.table.length - 1 ; i >= 0 ; i-- ) {
-      if ( this.table[i].max < random ) {
-        return this.table[i].payoff;
+    console.log('random', random);
+    for ( let i:number = 0; i < this.table.length ; i++ ) {
+      if ( random > this.table[i].max ) {
+        continue;
       }
+      console.log('payoff', this.table[i].payoff);
+      return this.table[i].payoff;
     }
   }
 

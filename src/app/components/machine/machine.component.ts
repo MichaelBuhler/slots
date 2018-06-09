@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { SpinResultSubject } from '../../models/spin.result';
+import { IPayoffProvider } from '../../services/payoff.provider.interface';
+import { SimpleWinTableService } from '../../services/simple.win.table.service';
+import { MathDotRandomService } from '../../services/math.dot.random.service';
 
 @Component({
   selector: 'slots-machine',
@@ -8,17 +11,19 @@ import { SpinResultSubject } from '../../models/spin.result';
 })
 export class MachineComponent {
 
+  private payoffProvider:IPayoffProvider;
+
   private reelCount:number = 3;
   private positionCount:number = 7;
   private spinResultSubject:SpinResultSubject = new SpinResultSubject();
 
-  public constructor () {}
+  private bank:number = 100;
 
-  private spin () : void {
-    const positions:number[] = [];
-    for ( let i:number = 0 ; i < this.reelCount ; i++ ) {
-      positions.push(Math.floor(Math.random() * this.positionCount));
-    }
-    this.spinResultSubject.next(positions);
+  public constructor () {
+    this.payoffProvider = new SimpleWinTableService(new MathDotRandomService());
+  }
+
+  private spin (bet:number) : void {
+    this.bank += this.payoffProvider.getPayoff() * bet - bet;
   }
 }
