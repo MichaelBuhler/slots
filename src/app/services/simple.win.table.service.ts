@@ -1,8 +1,8 @@
-import { IPayoffProvider } from '../interfaces/payoff.provider.interface';
+import { IWinTableRowProvider } from '../interfaces/payoff.provider.interface';
 import { IPsuedoRandomNumberGenerator } from '../interfaces/psuedo.random.number.generator.interface';
 import { IWinTableRow } from '../models/win.table.row';
 
-export class SimpleWinTableService implements IPayoffProvider {
+export class SimpleWinTableService implements IWinTableRowProvider {
 
   private   APPLE:number = 0;
   private  CHERRY:number = 1;
@@ -50,13 +50,13 @@ export class SimpleWinTableService implements IPayoffProvider {
   public constructor ( private prng:IPsuedoRandomNumberGenerator ) {
   }
 
-  public getPayoff () : number {
+  public getWinTableRow () : IWinTableRow {
     const random:number = this.prng.next();
     for ( let i:number = 0; i < this.table.length ; i++ ) {
       if ( random > this.table[i].max ) {
         continue;
       }
-      return this.table[i].payoff;
+      return this.table[i];
     }
   }
 

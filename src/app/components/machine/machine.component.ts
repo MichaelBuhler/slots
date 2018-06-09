@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { SpinResultSubject } from '../../models/spin.result';
 import { SimpleWinTableService } from '../../services/simple.win.table.service';
 import { MathDotRandomService } from '../../services/math.dot.random.service';
-import { IPayoffProvider } from '../../interfaces/payoff.provider.interface';
+import { IWinTableRowProvider } from '../../interfaces/payoff.provider.interface';
+import { IWinTableRow } from '../../models/win.table.row';
+import { Utils } from '../../utils';
 
 @Component({
   selector: 'slots-machine',
@@ -11,7 +13,7 @@ import { IPayoffProvider } from '../../interfaces/payoff.provider.interface';
 })
 export class MachineComponent {
 
-  private payoffProvider:IPayoffProvider;
+  private winTableRowProvider:IWinTableRowProvider;
 
   private reelCount:number = 3;
   private positionCount:number = 7;
@@ -20,10 +22,22 @@ export class MachineComponent {
   private bank:number = 100;
 
   public constructor () {
-    this.payoffProvider = new SimpleWinTableService(new MathDotRandomService());
+    this.winTableRowProvider = new SimpleWinTableService(new MathDotRandomService());
   }
 
   private spin (bet:number) : void {
-    this.bank += this.payoffProvider.getPayoff() * bet - bet;
+    const winTableRow:IWinTableRow = this.winTableRowProvider.getWinTableRow();
+
+    let permutation:number[] = [];
+    if ( winTableRow.combinations ) {
+      permutation = Utils.shuffleArray(winTableRow.combinations[Math.floor(Math.random() * winTableRow.combinations.length)]);
+    } else {
+      for ( let i:number = 0 ; i < this.reelCount ; i++ ) {
+        permutation.push(Math.floor(Math.random() * this.positionCount));
+      }
+    }
+    this.spinResultSubject.next(permutation);
+
+    this.bank += winTableRow.payoff * bet - bet;
   }
 }
