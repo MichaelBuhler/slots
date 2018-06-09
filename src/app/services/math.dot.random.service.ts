@@ -1,7 +1,11 @@
 import { IPsuedoRandomNumberGenerator } from './psuedo.random.number.generator.interface';
 
 export class MathDotRandomService implements IPsuedoRandomNumberGenerator {
-  public next() : number {
+  public next () : number {
     return Math.random();
+  }
+
+  public nextInt ( limit:number ) : number {
+    return Math.floor(Math.random() * limit);
   }
 }
